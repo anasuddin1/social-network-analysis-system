@@ -58,29 +58,3 @@ To satisfy strict DSA requirements, all key structures are implemented from scra
 *   **Frontend Control Logic**: JavaScript (ES6+, DOM binding, SVG mouse tracking, Force-Directed simulation engine)
 
 ---
-
-## 🏃 How to Run the Project
-
-### 1. Java CLI Backend
-Compile and run the main entry file in your terminal:
-```bash
-javac src/com/company/SocialNetworkSystem.java
-java com.company.SocialNetworkSystem
-```
-
-### 2. Interactive Web Frontend
-Since the frontend is a serverless, static implementation, you can run it immediately:
-*   **Direct Open**: Double-click [frontend/index.html](frontend/index.html) or drag it into any modern web browser.
-*   **Local Server (Recommended)**: Run a lightweight server in your terminal:
-    ```bash
-    python3 -m http.server 8000
-    ```
-    Open your browser and navigate to `http://localhost:8000/frontend/`.
-
----
-
-## 📚 Study Guide (For Viva Preparation)
-
-*   **BFS Complexity**: Time complexity is **$O(V + E)$** because it explores each vertex once and checks each connection. Space complexity is **$O(V)$** to store visited flags and queue pathways.
-*   **DFS Complexity**: Time complexity is **$O(V + E)$** using recursion. Space complexity is **$O(V)$** due to the call stack size.
-*   **Force-Directed Physics**: Updates nodes using Hooke's Law (spring tension pulls connected friends together) and Coulomb's Law (electric fields push nodes apart to prevent overlaps).

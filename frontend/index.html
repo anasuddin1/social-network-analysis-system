@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Network Analysis Visualizer</title>
+    <!-- Google Fonts: Outfit for UI, JetBrains Mono for Code/Log Console -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Controls -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-icon"><i class="fa-solid fa-share-nodes"></i></div>
+                <div class="logo-text">
+                    <h1>SOCIO-GRAPH</h1>
+                    <span>DSA Analysis System</span>
+                </div>
+            </div>
+
+            <div class="sidebar-menu">
+                <!-- Section 1: User Management -->
+                <div class="menu-section">
+                    <h3 class="section-title"><i class="fa-solid fa-user-gear"></i> User Management</h3>
+                    <div class="menu-group">
+                        <div class="input-row">
+                            <input type="text" id="username-input" placeholder="Enter username..." autocomplete="off">
+                            <button id="add-user-btn" class="btn primary-btn" title="Add User"><i class="fa-solid fa-user-plus"></i> Add</button>
+                        </div>
+                        <div class="input-row mt-s">
+                            <select id="remove-user-select">
+                                <option value="" disabled selected>Select user to remove...</option>
+                            </select>
+                            <button id="remove-user-btn" class="btn danger-btn" title="Remove User"><i class="fa-solid fa-user-minus"></i> Remove</button>
+                        </div>
+                        <div class="input-row mt-s">
+                            <input type="text" id="search-username" placeholder="Search user..." autocomplete="off">
+                            <button id="search-user-btn" class="btn secondary-btn" title="Search User"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 2: Friendship Management -->
+                <div class="menu-section">
+                    <h3 class="section-title"><i class="fa-solid fa-link"></i> Friendship Management</h3>
+                    <div class="menu-group">
+                        <div class="select-pair">
+                            <select id="friend-user1">
+                                <option value="" disabled selected>User 1</option>
+                            </select>
+                            <span class="connector-arrow"><i class="fa-solid fa-left-right"></i></span>
+                            <select id="friend-user2">
+                                <option value="" disabled selected>User 2</option>
+                            </select>
+                        </div>
+                        <div class="btn-row mt-s">
+                            <button id="add-friendship-btn" class="btn primary-btn flex-grow"><i class="fa-solid fa-link"></i> Create Friendship</button>
+                            <button id="remove-friendship-btn" class="btn danger-btn" title="Remove Friendship"><i class="fa-solid fa-link-slash"></i></button>
+                        </div>
+                        <div class="input-row mt-s">
+                            <select id="show-friends-select">
+                                <option value="" disabled selected>Select user...</option>
+                            </select>
+                            <button id="show-friends-btn" class="btn secondary-btn" title="Show Friends"><i class="fa-solid fa-users"></i> Friends</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 3: Analysis Features -->
+                <div class="menu-section">
+                    <h3 class="section-title"><i class="fa-solid fa-chart-simple"></i> Analytics</h3>
+                    <div class="menu-group">
+                        <div class="btn-row">
+                            <button id="sort-users-btn" class="btn secondary-btn flex-grow"><i class="fa-solid fa-arrow-down-a-z"></i> Alphabetical Sort</button>
+                            <button id="suggest-friends-btn" class="btn accent-btn flex-grow" title="Friend Suggestions"><i class="fa-solid fa-wand-magic-sparkles"></i> Suggestions</button>
+                        </div>
+                        
+                        <div class="select-pair mt-s">
+                            <select id="mutual-user1">
+                                <option value="" disabled selected>User 1</option>
+                            </select>
+                            <span class="connector-arrow"><i class="fa-solid fa-handshake"></i></span>
+                            <select id="mutual-user2">
+                                <option value="" disabled selected>User 2</option>
+                            </select>
+                        </div>
+                        <button id="mutual-friends-btn" class="btn secondary-btn w-100 mt-xs"><i class="fa-solid fa-users-viewfinder"></i> Find Mutual Friends</button>
+                    </div>
+                </div>
+
+                <!-- Section 4: Graph Algorithms -->
+                <div class="menu-section">
+                    <h3 class="section-title"><i class="fa-solid fa-circle-nodes"></i> Graph Algorithms</h3>
+                    <div class="menu-group">
+                        <!-- Shortest Path BFS -->
+                        <div class="algo-box">
+                            <span class="algo-label">Shortest Connection (BFS)</span>
+                            <div class="select-pair mt-xs">
+                                <select id="bfs-source">
+                                    <option value="" disabled selected>Source</option>
+                                </select>
+                                <span class="connector-arrow"><i class="fa-solid fa-route"></i></span>
+                                <select id="bfs-target">
+                                    <option value="" disabled selected>Target</option>
+                                </select>
+                            </div>
+                            <button id="run-bfs-btn" class="btn bfs-btn w-100 mt-s"><i class="fa-solid fa-play"></i> Run BFS Path</button>
+                        </div>
+
+                        <!-- Traversal DFS -->
+                        <div class="algo-box mt-s">
+                            <span class="algo-label">Network Traversal (DFS)</span>
+                            <div class="input-row mt-xs">
+                                <select id="dfs-start">
+                                    <option value="" disabled selected>Start user...</option>
+                                </select>
+                                <button id="run-dfs-btn" class="btn dfs-btn"><i class="fa-solid fa-play"></i> Run DFS</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick actions / System Options -->
+                <div class="menu-section">
+                    <h3 class="section-title"><i class="fa-solid fa-gears"></i> System Options</h3>
+                    <div class="menu-group-actions">
+                        <button id="load-demo-btn" class="btn info-btn"><i class="fa-solid fa-circle-info"></i> Load Demo Network</button>
+                        <button id="show-history-btn" class="btn secondary-btn"><i class="fa-solid fa-clock-rotate-left"></i> View Activity History</button>
+                        <button id="show-adjacency-btn" class="btn secondary-btn"><i class="fa-solid fa-network-wired"></i> Display Graph List</button>
+                        <button id="clear-all-btn" class="btn danger-btn"><i class="fa-solid fa-trash-can"></i> Reset Network</button>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Screen -->
+        <main class="main-content">
+            <!-- Header bar -->
+            <header class="main-header">
+                <div class="header-title">
+                    <h2>Interactive Visualizer</h2>
+                    <span id="current-algorithm-status">Standard Mode</span>
+                </div>
+                
+                <div class="header-stats">
+                    <div class="stat-card">
+                        <span class="stat-label">Users (Vertices)</span>
+                        <span class="stat-val" id="stat-users-count">0</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-label">Friendships (Edges)</span>
+                        <span class="stat-val" id="stat-edges-count">0</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-label">Graph Density</span>
+                        <span class="stat-val" id="stat-density">0.0%</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Graph Canvas -->
+            <div class="graph-container">
+                <!-- SVG Canvas for Graph rendering -->
+                <svg id="graph-svg" width="100%" height="100%">
+                    <!-- Definitions for marker arrows, filters, glow effects -->
+                    <defs>
+                        <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                            <feGaussianBlur stdDeviation="4" result="blur" />
+                            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                        </filter>
+                        <filter id="node-glow" x="-50%" y="-50%" width="200%" height="200%">
+                            <feGaussianBlur stdDeviation="6" result="blur" />
+                            <feComponentTransfer in="blur" result="boost">
+                                <feFuncA type="linear" slope="1.5"/>
+                            </feComponentTransfer>
+                            <feMerge>
+                                <feMergeNode in="boost" />
+                                <feMergeNode in="SourceGraphic" />
+                            </feMerge>
+                        </filter>
+                    </defs>
+                    <!-- Group for Edges/Lines -->
+                    <g id="links-group"></g>
+                    <!-- Group for Nodes/Circles -->
+                    <g id="nodes-group"></g>
+                </svg>
+
+                <!-- Help/Tip overlay -->
+                <div class="graph-tip">
+                    <i class="fa-solid fa-circle-question"></i> Tip: You can drag nodes to arrange them. Hover to see details.
+                </div>
+
+                <!-- Simulation Settings -->
+                <div class="simulation-controls">
+                    <button id="toggle-physics" class="physics-btn active" title="Toggle gravity physics"><i class="fa-wind-solid fa-solid fa-wind"></i> Gravity Physics: ON</button>
+                </div>
+            </div>
+
+            <!-- Output Logger Console (Integrated IDE Terminal) -->
+            <section class="console-section">
+                <div class="console-header">
+                    <div class="console-title"><i class="fa-solid fa-terminal"></i> Terminal System Logs</div>
+                    <div class="console-actions">
+                        <button id="clear-console-btn" title="Clear Logs"><i class="fa-solid fa-ban"></i></button>
+                        <span class="console-status"><span class="pulse-dot"></span> Java Engine Replica Online</span>
+                    </div>
+                </div>
+                <div class="console-body" id="console-logs">
+                    <div class="log-line system-log">=== SOCIAL NETWORK ANALYSIS SYSTEM INITIALIZED ===</div>
+                    <div class="log-line">Enter users and friendships to begin graph operations. Replicating com.company.SocialNetworkSystem.</div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- History modal popup -->
+    <div class="modal-overlay" id="history-modal">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-clock-rotate-left"></i> Activity History Stack</h3>
+                <button class="close-modal" id="close-history-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-description">This stack shows recent activities (Newest First) mirroring the CustomStack&lt;String&gt; in Java.</p>
+                <div class="history-list" id="modal-history-list">
+                    <!-- Dynamic stack elements -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script loading -->
+    <script src="app.js"></script>
+</body>
+</html>
